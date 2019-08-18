@@ -58,6 +58,7 @@ public class Crate : MonoBehaviour {
             Destroy(cratecollider);
             NitroBlowUp.SetActive(true);
             gameObject.GetComponent<Rigidbody>().useGravity = false;
+            Destroy(gameObject, destoryTime);
         }
 
         if (IsAkuAku == true && CrateHealth == 0)

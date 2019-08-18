@@ -19,7 +19,10 @@ public class HurtPlayer : MonoBehaviour {
     {
        if(col.gameObject.tag == "Player")
         {
-            FindObjectOfType<HealthManager>().HurtPlayer(damageToGive);
+            Vector3 hitDirection = col.transform.position - transform.position;
+            hitDirection = hitDirection.normalized;
+
+            FindObjectOfType<HealthManager>().HurtPlayer(damageToGive, hitDirection);
         }
     }
 }

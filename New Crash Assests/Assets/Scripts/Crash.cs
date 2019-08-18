@@ -42,6 +42,8 @@ public class Crash : MonoBehaviour
     public float KnockBackTime;
     private float KnockBackCounter;
 
+    
+
     public HealthManager health;
 
     // Use this for initialization
@@ -195,17 +197,7 @@ public class Crash : MonoBehaviour
         jumpBox.SetActive(true);
     }
 
-    void AkuSpawn()
-    {
-
-        Mask.SetActive(true);
-
-    }
-
-    void bye()
-    {
-        Mask.SetActive(false);
-    }
+   
 
     private void OnTriggerEnter(Collider other)
     {
