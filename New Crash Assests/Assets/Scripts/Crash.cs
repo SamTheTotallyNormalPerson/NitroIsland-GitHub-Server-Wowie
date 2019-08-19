@@ -98,16 +98,15 @@ public class Crash : MonoBehaviour
 
                 if (controller.isGrounded && Input.GetButton("Fire1"))
                 {
-                   anim.SetBool("isDown", true);
-                    moveSpeed = 2f;
-
+                    Crouch();
+                    
                 }
 
-                else
+                if (controller.isGrounded && !Input.GetButton("Fire1"))
                 {
                     anim.SetBool("isDown", false);
                     moveSpeed = 4f;
-
+                    controller.height = 0.85f;
 
                 }
 
@@ -226,6 +225,14 @@ public class Crash : MonoBehaviour
            // jumpSound.Play();
            jumpBox.SetActive(true);
         }
+    }
+
+    void Crouch()
+    {
+        anim.SetBool("isDown", true);
+        moveSpeed = 2f;
+        
+        
     }
 
 }
