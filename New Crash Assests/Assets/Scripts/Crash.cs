@@ -42,9 +42,10 @@ public class Crash : MonoBehaviour
     public float KnockBackTime;
     private float KnockBackCounter;
 
-    
+    public float characterCrouchPos;
 
     public HealthManager health;
+
 
     // Use this for initialization
     void Start()
@@ -107,7 +108,7 @@ public class Crash : MonoBehaviour
                     anim.SetBool("isDown", false);
                     moveSpeed = 4f;
                     controller.height = 0.85f;
-
+                    
                 }
 
                 // Spin
@@ -231,7 +232,7 @@ public class Crash : MonoBehaviour
     {
         anim.SetBool("isDown", true);
         moveSpeed = 2f;
-        
+        controller.height = .5f;
         
     }
 
