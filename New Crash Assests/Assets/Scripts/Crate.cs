@@ -47,7 +47,6 @@ public class Crate : MonoBehaviour {
             CrateMesh.SetActive(false);
             Destroy(cratecollider);
             Destroy(gameObject, destoryTime);
-            BounceBox.SetActive(true);
             gameObject.GetComponent<Rigidbody>().useGravity = false;
             CrateEffect.SetActive(true);
         }
@@ -117,7 +116,7 @@ public class Crate : MonoBehaviour {
         {
             CrateHealth -= 1;
             crateDamnage.Play();
-
+            BounceBox.SetActive(true);
         }
 
        if (other.tag == "Death")
