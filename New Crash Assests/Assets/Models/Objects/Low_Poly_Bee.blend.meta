@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: b7730c04f6df83843af76af27e2edb05
-timeCreated: 1570984655
+guid: 6a2d7e69f367ce24087f12644337e473
+timeCreated: 1570996958
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -8,50 +8,20 @@ ModelImporter:
     100000: Cube
     100002: Cube_001
     100004: Cube_002
-    100006: Cube_003
-    100008: Cube_004
-    100010: Cube_005
-    100012: Cube_006
-    100014: Cube_007
-    100016: Cube_008
-    100018: //RootNode
+    100006: //RootNode
     400000: Cube
     400002: Cube_001
     400004: Cube_002
-    400006: Cube_003
-    400008: Cube_004
-    400010: Cube_005
-    400012: Cube_006
-    400014: Cube_007
-    400016: Cube_008
-    400018: //RootNode
+    400006: //RootNode
     2300000: Cube
     2300002: Cube_001
     2300004: Cube_002
-    2300006: Cube_003
-    2300008: Cube_004
-    2300010: Cube_005
-    2300012: Cube_006
-    2300014: Cube_007
-    2300016: Cube_008
     3300000: Cube
     3300002: Cube_001
     3300004: Cube_002
-    3300006: Cube_003
-    3300008: Cube_004
-    3300010: Cube_005
-    3300012: Cube_006
-    3300014: Cube_007
-    3300016: Cube_008
-    4300000: Cube_008
-    4300002: Cube_007
-    4300004: Cube_006
-    4300006: Cube_005
-    4300008: Cube_004
-    4300010: Cube_003
-    4300012: Cube_002
-    4300014: Cube_001
-    4300016: Cube
+    4300000: Cube_002
+    4300002: Cube_001
+    4300004: Cube
     7400000: Default Take
     9500000: //RootNode
   materials:
