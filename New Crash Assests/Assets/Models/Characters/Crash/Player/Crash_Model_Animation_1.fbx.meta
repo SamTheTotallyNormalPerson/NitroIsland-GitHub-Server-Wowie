@@ -7267,7 +7267,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Jump End
       takeName: Crash_Rig|rigAction
-      firstFrame: 149
+      firstFrame: 162
       lastFrame: 168
       wrapMode: 0
       orientationOffsetY: 0

@@ -46,6 +46,9 @@ public class Crash : MonoBehaviour
 
     public HealthManager health;
 
+    public bool isFlop;
+
+    public bool isJump;
 
     // Use this for initialization
     void Start()
@@ -79,28 +82,58 @@ public class Crash : MonoBehaviour
 
                 moveDirection = moveDirection.normalized * moveSpeed;
                 moveDirection.y = yStore;
+               
+                //Jump
 
                 if (controller.isGrounded)
                 {
 
                     moveDirection.y = 0f;
                     jumpBox.SetActive(false);
+
+              
                     if (Input.GetButtonDown("Jump"))
                     {
                         moveDirection.y = jumpForce;
                     //    jumpSound.Play();
                       jumpBox.SetActive(true);
+                        isJump = true;
 
+                    }
+
+                    else
+                    {
+                        isJump = false;
                     }
                 }
 
+                // BellyFlop
 
+                if (!controller.isGrounded && Input.GetButton("Fire1") && isFlop == false && isJump == true)
+                {
+                   Invoke("Flop", .5f);
+                    isAlive = false;
+                    anim.SetBool("isFlop", true);
+                    isFlop = true;
+                    
+                }
+
+
+                if (controller.isGrounded && isFlop == true && isJump == false)
+                {
+                    Invoke("Pause", 1.5f);
+                    gravityScale = 0.05f;
+                    anim.SetBool("isFlop", false);
+                    isFlop = false;
+                    isAlive = false;
+                }
                 // Crouch
 
                 if (controller.isGrounded && Input.GetButton("Fire1"))
                 {
                     Crouch();
                     
+
                 }
 
                 if (controller.isGrounded && !Input.GetButton("Fire1"))
@@ -120,19 +153,11 @@ public class Crash : MonoBehaviour
                         SpinObject.SetActive(true);
                         PlayerModel.SetActive(false);
                         moveSpeed = 6f;
-                        Debug.Log("Your Spinning Don't Worry Your Not Crazy");
+                       
                     }
 
-                    // Flop
-
-                    if (!controller.isGrounded && Input.GetButton("Fire1"))
-                    {
-                   //     anim.SetBool("Flop", true);
-                    }
-                    else
-                    {
-                  //      anim.SetBool("Flop", false);
-                    }
+                    
+                    
                 }
 
             }
@@ -159,8 +184,11 @@ public class Crash : MonoBehaviour
                 anim.SetBool("isGrounded", controller.isGrounded);
                 anim.SetFloat("Speed", (Mathf.Abs(Input.GetAxis("Vertical")) + Mathf.Abs(Input.GetAxis("Horizontal"))));
 
-                
-            
+
+            if (!controller.isGrounded)
+            {
+                jumpBox.SetActive(true);
+            }
 
            
             
@@ -236,4 +264,16 @@ public class Crash : MonoBehaviour
         
     }
 
+    void Flop()
+    {
+        isAlive = true;
+        gravityScale = .25f;
+        
+    }
+
+    void Pause()
+    {
+        isAlive = true;
+        
+    }
 }

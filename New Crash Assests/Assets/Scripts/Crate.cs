@@ -49,6 +49,8 @@ public class Crate : MonoBehaviour {
             Destroy(gameObject, destoryTime);
             gameObject.GetComponent<Rigidbody>().useGravity = false;
             CrateEffect.SetActive(true);
+            BounceBox.SetActive(true);
+            Destroy(BounceBox, .5f);
         }
 
         if (IsNitro == true && CrateHealth == 0)

@@ -8,7 +8,7 @@ public class WumpaPickUp : MonoBehaviour {
     public AudioSource wumpapickyupper;
     public float destoryTime = .12f;
     public GameObject wumpaMesh;
-
+   
 	// Use this for initialization
 	void Start () {
 		
@@ -25,8 +25,14 @@ public class WumpaPickUp : MonoBehaviour {
         {
             wumpapickyupper.Play();
             FindObjectOfType<GameManager>().AddWumpa(value);
+            FindObjectOfType<GameManager>().anim.SetBool("WumpAdd", true);
+            FindObjectOfType<GameManager>().Invoke("jeff", 1f);
             Destroy(wumpaMesh);
             Destroy(gameObject , destoryTime);
+            
         }
     }
+
+   
+
 }

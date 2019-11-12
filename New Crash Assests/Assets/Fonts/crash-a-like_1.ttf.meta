@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: c344cd99f6b7c01409ffc6a74a71f964
+timeCreated: 1573441982
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Crash-a-Like
+  fontNames:
+  - Crash-a-Like
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
