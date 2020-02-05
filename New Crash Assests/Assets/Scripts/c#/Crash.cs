@@ -24,7 +24,7 @@ public class Crash : MonoBehaviour
 
     public GameObject SpinObject;
 
-  //  public AudioSource jumpSound;
+    public AudioSource jumpSound;
 
    public GameObject jumpBox;
 
@@ -50,6 +50,8 @@ public class Crash : MonoBehaviour
 
     public bool isJump;
 
+    public GameObject FlopCollider;
+
     // Use this for initialization
     void Start()
     {
@@ -61,6 +63,8 @@ public class Crash : MonoBehaviour
       //  jumpBox.SetActive(false);
       
         isAlive = true;
+
+        FlopCollider.SetActive(false);
     }
 
     // Update is called once per frame
@@ -95,7 +99,7 @@ public class Crash : MonoBehaviour
                     if (Input.GetButtonDown("Jump"))
                     {
                         moveDirection.y = jumpForce;
-                    //    jumpSound.Play();
+                        jumpSound.Play();
                       jumpBox.SetActive(true);
                         isJump = true;
 
@@ -115,7 +119,7 @@ public class Crash : MonoBehaviour
                     isAlive = false;
                     anim.SetBool("isFlop", true);
                     isFlop = true;
-                    
+                    FlopCollider.SetActive(false);
                 }
 
 
@@ -126,6 +130,7 @@ public class Crash : MonoBehaviour
                     anim.SetBool("isFlop", false);
                     isFlop = false;
                     isAlive = false;
+                    FlopCollider.SetActive(true);
                 }
                 // Crouch
 
@@ -223,6 +228,7 @@ public class Crash : MonoBehaviour
     void Jumper()
     {
         jumpBox.SetActive(true);
+        
     }
 
    
@@ -268,12 +274,13 @@ public class Crash : MonoBehaviour
     {
         isAlive = true;
         gravityScale = .25f;
-        
+        FlopCollider.SetActive(false);
+
     }
 
     void Pause()
     {
         isAlive = true;
-        
+        FlopCollider.SetActive(false);
     }
 }

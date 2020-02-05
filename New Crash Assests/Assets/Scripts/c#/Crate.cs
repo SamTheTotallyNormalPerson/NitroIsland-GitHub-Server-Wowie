@@ -78,7 +78,7 @@ public class Crate : MonoBehaviour {
             Destroy(cratecollider);
             NitroBlowUp.SetActive(true);
             gameObject.GetComponent<Rigidbody>().useGravity = false;
-
+            Destroy(gameObject, destoryTime);
         }
 
 
@@ -87,7 +87,7 @@ public class Crate : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Spin" && IsRegular == true)
+        if (other.tag == "Spin" || other.tag == "Jump" && IsRegular == true)
         {
             CrateHealth -= 1;
             crateDamnage.Play();
@@ -100,13 +100,13 @@ public class Crate : MonoBehaviour {
             
         }
 
-       if (other.tag == "Spin" && IsTnt == true)
+       if (other.tag == "Jump" && IsTnt == true)
         {
             Invoke("OnTntEnter", 4.5f);
             TntSound.Play();
         }
 
-        if (other.tag == "Spin" && IsNitro == true)
+        if (other.tag == "Spin" && IsNitro == true || IsTnt == true)
         {
             CrateHealth -= 1;
         }
@@ -114,14 +114,14 @@ public class Crate : MonoBehaviour {
         else 
 
 
-        if (other.tag == "Jump")
-        {
-            CrateHealth -= 1;
-            crateDamnage.Play();
-            BounceBox.SetActive(true);
-        }
+       
 
        if (other.tag == "Death")
+        {
+            CrateHealth -= 1;
+        }
+
+       if (other.tag == "Flop")
         {
             CrateHealth -= 1;
         }
