@@ -26,11 +26,11 @@ public class Crash : MonoBehaviour
 
     public AudioSource jumpSound;
 
-   public GameObject jumpBox;
+    public GameObject jumpBox;
 
     public GameObject Mask;
 
-    public GameObject MaskSpawn;  
+    public GameObject MaskSpawn;
 
     public AudioSource Wine;
 
@@ -59,9 +59,9 @@ public class Crash : MonoBehaviour
 
         health = FindObjectOfType<HealthManager>();
         SpinObject.SetActive(false);
-        
-      //  jumpBox.SetActive(false);
-      
+
+        //  jumpBox.SetActive(false);
+
         isAlive = true;
 
         FlopCollider.SetActive(false);
@@ -75,7 +75,7 @@ public class Crash : MonoBehaviour
 
 
             // moveDirection = new Vector3(Input.GetAxis("Horizontal") * moveSpeed, moveDirection.y, Input.GetAxis("Vertical") * moveSpeed);
-            if (KnockBackCounter <- 0)
+            if (KnockBackCounter < -0)
             {
 
 
@@ -86,7 +86,7 @@ public class Crash : MonoBehaviour
 
                 moveDirection = moveDirection.normalized * moveSpeed;
                 moveDirection.y = yStore;
-               
+
                 //Jump
 
                 if (controller.isGrounded)
@@ -95,12 +95,12 @@ public class Crash : MonoBehaviour
                     moveDirection.y = 0f;
                     jumpBox.SetActive(false);
 
-              
+
                     if (Input.GetButtonDown("Jump"))
                     {
                         moveDirection.y = jumpForce;
                         jumpSound.Play();
-                      jumpBox.SetActive(true);
+                        jumpBox.SetActive(true);
                         isJump = true;
 
                     }
@@ -115,7 +115,7 @@ public class Crash : MonoBehaviour
 
                 if (!controller.isGrounded && Input.GetButton("Fire1") && isFlop == false && isJump == true)
                 {
-                   Invoke("Flop", .5f);
+                    Invoke("Flop", .5f);
                     isAlive = false;
                     anim.SetBool("isFlop", true);
                     isFlop = true;
@@ -137,7 +137,7 @@ public class Crash : MonoBehaviour
                 if (controller.isGrounded && Input.GetButton("Fire1"))
                 {
                     Crouch();
-                    
+
 
                 }
 
@@ -146,8 +146,13 @@ public class Crash : MonoBehaviour
                     anim.SetBool("isDown", false);
                     moveSpeed = 4f;
                     controller.height = 0.85f;
-                    
+
                 }
+
+                // Slide
+
+                
+
 
                 // Spin
 
@@ -158,12 +163,14 @@ public class Crash : MonoBehaviour
                         SpinObject.SetActive(true);
                         PlayerModel.SetActive(false);
                         moveSpeed = 6f;
-                       
+
                     }
 
-                    
-                    
+
+
                 }
+
+
 
             }
             else
@@ -174,20 +181,20 @@ public class Crash : MonoBehaviour
             //
 
             moveDirection.y = moveDirection.y + (Physics.gravity.y * gravityScale);
-                controller.Move(moveDirection * Time.deltaTime);
+            controller.Move(moveDirection * Time.deltaTime);
 
-                //Move The Player In Diffrent Directions Base On The Camera Look
+            //Move The Player In Diffrent Directions Base On The Camera Look
 
-                if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
-                {
-                    transform.rotation = Quaternion.Euler(0f, pivot.rotation.eulerAngles.y, 0f);
-                    Quaternion newRotation = Quaternion.LookRotation(new Vector3(moveDirection.x, 0f, moveDirection.z));
-                    PlayerModel.transform.rotation = Quaternion.Slerp(PlayerModel.transform.rotation, newRotation, rotateSpeed * Time.deltaTime);
-                }
+            if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
+            {
+                transform.rotation = Quaternion.Euler(0f, pivot.rotation.eulerAngles.y, 0f);
+                Quaternion newRotation = Quaternion.LookRotation(new Vector3(moveDirection.x, 0f, moveDirection.z));
+                PlayerModel.transform.rotation = Quaternion.Slerp(PlayerModel.transform.rotation, newRotation, rotateSpeed * Time.deltaTime);
+            }
 
-                //Animations
-                anim.SetBool("isGrounded", controller.isGrounded);
-                anim.SetFloat("Speed", (Mathf.Abs(Input.GetAxis("Vertical")) + Mathf.Abs(Input.GetAxis("Horizontal"))));
+            //Animations
+            anim.SetBool("isGrounded", controller.isGrounded);
+            anim.SetFloat("Speed", (Mathf.Abs(Input.GetAxis("Vertical")) + Mathf.Abs(Input.GetAxis("Horizontal"))));
 
 
             if (!controller.isGrounded)
@@ -195,18 +202,18 @@ public class Crash : MonoBehaviour
                 jumpBox.SetActive(true);
             }
 
-           
-            
-               
 
 
-            
 
-           
+
+
+
+
+
         }
     }
 
-   public void KnockBack(Vector3 direction)
+    public void KnockBack(Vector3 direction)
     {
         KnockBackCounter = KnockBackTime;
 
@@ -214,7 +221,7 @@ public class Crash : MonoBehaviour
         moveDirection = direction * KnockBackForce;
         moveDirection.y = KnockBackForce;
 
-        
+
     }
     void Sppin()
     {
@@ -228,27 +235,27 @@ public class Crash : MonoBehaviour
     void Jumper()
     {
         jumpBox.SetActive(true);
-        
+
     }
 
-   
+
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Death")
         {
-           Wine.Play();
+            Wine.Play();
 
-            
+
         }
-        
-       if(other.tag == "Bouncey")
+
+        if (other.tag == "Bouncey")
         {
             moveDirection.y = jumpForce;
-          //  jumpSound.Play();
-           jumpBox.SetActive(true);
+            //  jumpSound.Play();
+            jumpBox.SetActive(true);
         }
-        
+
     }
 
 
@@ -257,8 +264,8 @@ public class Crash : MonoBehaviour
         if (collision.collider.tag == "Crate")
         {
             moveDirection.y = jumpForce;
-           // jumpSound.Play();
-           jumpBox.SetActive(true);
+            // jumpSound.Play();
+            jumpBox.SetActive(true);
         }
     }
 
@@ -267,7 +274,7 @@ public class Crash : MonoBehaviour
         anim.SetBool("isDown", true);
         moveSpeed = 2f;
         controller.height = .5f;
-        
+
     }
 
     void Flop()
@@ -282,5 +289,10 @@ public class Crash : MonoBehaviour
     {
         isAlive = true;
         FlopCollider.SetActive(false);
+    }
+
+    void Slide()
+    {
+        moveSpeed = 7;
     }
 }

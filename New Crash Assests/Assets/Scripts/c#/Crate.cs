@@ -72,7 +72,7 @@ public class Crate : MonoBehaviour {
             gameObject.GetComponent<Rigidbody>().useGravity = false;
         }
 
-        if (IsTnt == true && CrateHealth == 0)
+        if (IsTnt == true && CrateHealth <= 0)
         {
             CrateMesh.SetActive(false);
             Destroy(cratecollider);
@@ -102,7 +102,7 @@ public class Crate : MonoBehaviour {
 
        if (other.tag == "Jump" && IsTnt == true)
         {
-            Invoke("OnTntEnter", 4.5f);
+            Invoke("OnTntEnter", 4);
             TntSound.Play();
         }
 
