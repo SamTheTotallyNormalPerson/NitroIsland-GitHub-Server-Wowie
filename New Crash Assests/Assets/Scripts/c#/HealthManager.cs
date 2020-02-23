@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class HealthManager : MonoBehaviour {
     public int maxHealth;
     public int currentHealth;
@@ -23,6 +23,12 @@ public class HealthManager : MonoBehaviour {
     public float respawnLength;
 
     public AudioSource Woah;
+
+    public Image blackScreen;
+    private bool isFadeToBlack;
+    private bool isFadeFromBlack;
+    public float fadeSpeed;
+    public float waitforFade;
 
     // Use this for initialization
     void Start () {
@@ -60,7 +66,25 @@ public class HealthManager : MonoBehaviour {
                 crashRenderer.enabled = true;
             }
         }
-	}
+
+        if (isFadeToBlack)
+        {
+            blackScreen.color = new Color(blackScreen.color.r, blackScreen.color.b, blackScreen.color.g, Mathf.MoveTowards(blackScreen.color.a, 1f, fadeSpeed * Time.deltaTime));
+            if(blackScreen.color.a == 1f)
+            {
+                isFadeToBlack = false;
+            }
+        }
+
+        if (isFadeFromBlack)
+        {
+            blackScreen.color = new Color(blackScreen.color.r, blackScreen.color.b, blackScreen.color.g, Mathf.MoveTowards(blackScreen.color.a, 0f, fadeSpeed * Time.deltaTime));
+            if (blackScreen.color.a == 0f)
+            {
+                isFadeFromBlack = false;
+            }
+        }
+    }
 
     public void HurtPlayer(int damage, Vector3 direction)
     {
@@ -106,10 +130,17 @@ public class HealthManager : MonoBehaviour {
     {
         isRespawning = true;
         theplayer.gameObject.SetActive(false);
-
+        
 
         yield return new WaitForSeconds(respawnLength);
+
+
+        isFadeToBlack = true;
+
+        yield return new WaitForSeconds(waitforFade);
         isRespawning = false;
+
+        isFadeFromBlack = true;
 
         theplayer.gameObject.SetActive(true);
         theplayer.transform.position = respawnPoint;
