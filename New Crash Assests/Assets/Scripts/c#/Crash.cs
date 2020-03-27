@@ -52,6 +52,9 @@ public class Crash : MonoBehaviour
 
     public GameObject FlopCollider;
 
+    public bool isRun;
+
+    public bool isCrouch;
     // Use this for initialization
     void Start()
     {
@@ -78,7 +81,7 @@ public class Crash : MonoBehaviour
             if (KnockBackCounter < -0)
             {
 
-
+                    
 
                 float yStore = moveDirection.y;
 
@@ -134,10 +137,10 @@ public class Crash : MonoBehaviour
                 }
                 // Crouch
 
-                if (controller.isGrounded && Input.GetButton("Fire1"))
+                if (controller.isGrounded && Input.GetButton("Fire1") && isRun == false)
                 {
                     Crouch();
-
+                    isCrouch = true;
 
                 }
 
@@ -146,12 +149,17 @@ public class Crash : MonoBehaviour
                     anim.SetBool("isDown", false);
                     moveSpeed = 4f;
                     controller.height = 0.85f;
-
+                    isCrouch = false;
                 }
 
                 // Slide
 
-                
+               if (isRun == true && Input.GetButtonDown("Fire1") && isCrouch == false)
+                {
+                    Debug.Log("I am Sliding into the D.Ms");
+                    Invoke("Norm", 1f);
+                    moveSpeed = 7;
+                }
 
 
                 // Spin
@@ -196,6 +204,16 @@ public class Crash : MonoBehaviour
             anim.SetBool("isGrounded", controller.isGrounded);
             anim.SetFloat("Speed", (Mathf.Abs(Input.GetAxis("Vertical")) + Mathf.Abs(Input.GetAxis("Horizontal"))));
 
+
+            if (Input.GetAxis("Vertical") > 0 || (Input.GetAxis("Horizontal") > 0))   
+            {
+                isRun = true;
+            }
+
+            else
+            {
+                isRun = false; 
+            }
 
             if (!controller.isGrounded)
             {
@@ -274,7 +292,7 @@ public class Crash : MonoBehaviour
         anim.SetBool("isDown", true);
         moveSpeed = 2f;
         controller.height = .5f;
-
+        
     }
 
     void Flop()
@@ -291,8 +309,8 @@ public class Crash : MonoBehaviour
         FlopCollider.SetActive(false);
     }
 
-    void Slide()
+    void Norm()
     {
-        moveSpeed = 7;
+        moveSpeed = 4;
     }
 }
