@@ -12,10 +12,13 @@ public class Crate : MonoBehaviour {
     public GameObject NitroBlowUp;
     public BoxCollider cratecollider;
     public GameObject masky;
+
     public bool IsNitro;
     public bool IsAkuAku;
     public bool IsTnt;
     public bool IsRegular;
+    public bool IsBounce;
+
     public AudioSource TntSound;
     public GameObject BounceBox;
     public GameObject CrateEffect;
@@ -29,7 +32,7 @@ public class Crate : MonoBehaviour {
 
         CrateEffect.SetActive(false);
 
-        if (CrateHealth == 0)
+        if (CrateHealth <= 0)
         {
             FindObjectOfType<GameManager>().AddBox(CrateVaule);
             Destroy(gameObject);
@@ -40,10 +43,9 @@ public class Crate : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (IsRegular == true && CrateHealth == 0)
+        if (IsRegular == true && CrateHealth <= 0)
         {
-            
-            FindObjectOfType<GameManager>().AddBox(CrateVaule);
+          
             CrateMesh.SetActive(false);
             Destroy(cratecollider);
             Destroy(gameObject, destoryTime);
@@ -53,7 +55,7 @@ public class Crate : MonoBehaviour {
             Destroy(BounceBox, .5f);
         }
 
-        if (IsNitro == true && CrateHealth == 0)
+        if (IsNitro == true && CrateHealth <= 0)
         {
             CrateMesh.SetActive(false);
             Destroy(cratecollider);
@@ -62,7 +64,7 @@ public class Crate : MonoBehaviour {
             Destroy(gameObject, destoryTime);
         }
 
-        if (IsAkuAku == true && CrateHealth == 0)
+        if (IsAkuAku == true && CrateHealth <= 0)
         {
             CrateMesh.SetActive(false);
             Destroy(cratecollider);
@@ -111,11 +113,6 @@ public class Crate : MonoBehaviour {
             CrateHealth -= 1;
         }
 
-        else 
-
-
-       
-
        if (other.tag == "Death")
         {
             CrateHealth -= 1;
@@ -125,6 +122,16 @@ public class Crate : MonoBehaviour {
         {
             CrateHealth -= 1;
         }
+
+       if (other.tag == "Jump" && IsBounce == true)
+        {
+            BounceBox.SetActive(true);
+        }
+
+        if (other.tag != "Jump" && IsBounce == true)
+        {
+            BounceBox.SetActive(false);
+        }
     }
 
     void OnTntEnter()
@@ -132,6 +139,10 @@ public class Crate : MonoBehaviour {
         CrateHealth -= 1;
     }
    
+    void OnBounceBoxEnter()
+    {
+        BounceBox.SetActive(true);
+    }
 }
 
     
