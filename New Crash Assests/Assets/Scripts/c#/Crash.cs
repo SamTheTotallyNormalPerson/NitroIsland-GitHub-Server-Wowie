@@ -267,7 +267,7 @@ public class Crash : MonoBehaviour
 
         }
 
-        if (other.tag == "Bouncey")
+        if (other.CompareTag ("Bouncey"))
         {
             moveDirection.y = jumpForce;
             //  jumpSound.Play();
